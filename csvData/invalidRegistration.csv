@@ -1,0 +1,7 @@
+testName,firstName,lastName,email,password,confirmPassword,errorType,errorMessage
+"Short password",,,,pass,,password,Minimum length of this field must be equal or greater than 8 symbols. Leading and trailing spaces will be ignored.
+"One class password",,,,password,,password,"Minimum of different classes of characters in password is 3. Classes of characters: Lower Case, Upper Case, Digits, Special Characters."
+"Confirm password not the same",,,,Password123,pass,confirmPassword,"Please enter the same value again."
+"Invalid email",,,notAnEmail,,,email,"Please enter a valid email address (Ex: johndoe@domain.com)."
+"Empty First Name",,"Dooley",,,,firstName,"This is a required field."
+"Empty Last Name","Alex",,,,,lastName,"This is a required field."

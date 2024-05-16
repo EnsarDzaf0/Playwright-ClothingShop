@@ -1,5 +1,4 @@
 import { expect, type Locator, type Page } from '@playwright/test';
-import { registrationParams } from '../test-params/registration/registration';
 import { formDataTypes } from '../interfaces/registration';
 
 export class RegistrationPage {
@@ -20,28 +19,30 @@ export class RegistrationPage {
         confirmPassword: Locator;
         email: Locator;
         firstName: Locator;
+        lastName: Locator;
         errorMessageBox: Locator;
     }
 
     constructor(page: Page) {
         this.page = page;
-        this.registrationLink = registrationParams.registrationLink;
-        this.registrationPageTitle = registrationParams.registrationPageTitle;
-        this.form = page.locator(registrationParams.registrationFormLocator);
+        this.registrationLink = 'https://magento.softwaretestingboard.com/customer/account/create/';
+        this.registrationPageTitle = 'Create New Customer Account';
+        this.form = page.locator('form[id="form-validate"]');
         this.formFields = {
-            firstName: this.form.getByTitle(registrationParams.registrationFormFields.firstName),
-            lastName: this.form.getByTitle(registrationParams.registrationFormFields.lastName),
-            email: this.form.getByTitle(registrationParams.registrationFormFields.email),
-            password: this.form.locator(registrationParams.registrationFormFields.password),
-            passwordConfirmation: this.form.getByTitle(registrationParams.registrationFormFields.passwordConfirmation),
-            submitButton: this.form.getByTitle(registrationParams.registrationFormFields.submitButton)
+            firstName: this.form.getByTitle('First Name'),
+            lastName: this.form.getByTitle('Last Name'),
+            email: this.form.getByTitle('Email'),
+            password: this.form.locator('input[id="password"]'),
+            passwordConfirmation: this.form.getByTitle('Confirm Password'),
+            submitButton: this.form.getByTitle('Create an Account')
         };
         this.formErrors = {
-            password: this.form.locator(registrationParams.passwordError.locator),
-            confirmPassword: this.form.locator(registrationParams.confirmPasswordError.locator),
-            email: this.form.locator(registrationParams.emailError.locator),
-            firstName: this.form.locator(registrationParams.firstNameError.locator),
-            errorMessageBox: this.form.locator(`div:has-text("${registrationParams.errorMessageBox.error}"`)
+            password: this.form.locator('div[id="password-error"]'),
+            confirmPassword: this.form.locator('div[id="password-confirmation-error"]'),
+            email: this.form.locator('div[id="email_address-error"]'),
+            firstName: this.form.locator('div[id="firstname-error"]'),
+            lastName: this.form.locator('div[id="lastname-error"]'),
+            errorMessageBox: this.form.locator(`div:has-text("First Name is not valid! Last Name is not valid!"`)
         }
     }
 
