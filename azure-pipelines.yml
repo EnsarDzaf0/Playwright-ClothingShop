@@ -1,0 +1,55 @@
+trigger:
+
+- main
+
+ 
+
+variables:
+
+- name: PLAYWRIGHT_JUNIT_OUTPUT_NAME
+
+  value: results.xml 
+
+ 
+
+pool:
+
+  vmImage: windows-latest
+
+  demands: npm
+
+ 
+
+steps:
+
+- task: Npm@1
+
+  inputs:
+
+    command: 'ci'
+
+ 
+
+- task: CmdLine@2
+
+  inputs:
+
+    script: 'npx playwright install --with-deps'
+
+ 
+
+- task: CmdLine@2
+
+  inputs:
+
+    script: 'npx playwright test --reporter=junit'
+
+ 
+
+- task: PublishTestResults@2
+
+  inputs:
+
+    testResultsFormat: 'JUnit'
+
+    testResultsFiles: '**/results.xml'
