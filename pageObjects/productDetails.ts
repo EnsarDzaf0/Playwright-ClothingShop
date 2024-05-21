@@ -1,0 +1,73 @@
+import { type Locator, type Page } from '@playwright/test';
+import { reviewDataTypes } from '../interfaces/review';
+
+export class ProductDetailsPage {
+    readonly page: Page;
+    readonly productDetails: Locator;
+    readonly reviewsTab: Locator;
+    readonly reviewForm: Locator;
+    readonly reviewFormFields: {
+        stars: Locator;
+        nickname: Locator;
+        summary: Locator;
+        review: Locator;
+        submitButton: Locator;
+    };
+    readonly pageMessages: Locator;
+
+    constructor(page: Page) {
+        this.page = page;
+        this.productDetails = page.locator('div[class="product data items"]');
+        this.reviewsTab = this.productDetails.locator('div[id="tab-label-reviews"]');
+        this.reviewForm = this.productDetails.locator('form[class="review-form"]');
+        this.reviewFormFields = {
+            stars: this.reviewForm.locator('div[class="control review-control-vote"]'),
+            nickname: this.reviewForm.locator('input[id="nickname_field"]'),
+            summary: this.reviewForm.locator('input[id="summary_field"]'),
+            review: this.reviewForm.locator('textarea[id="review_field"]'),
+            submitButton: this.reviewForm.locator('button[class="action submit primary"]')
+        };
+        this.pageMessages = page.locator('div[class="page messages"]');
+    }
+
+    async switchToReviewsTab() {
+        await this.productDetails.scrollIntoViewIfNeeded();
+        await this.reviewsTab.click();
+    }
+
+    async selectStarRating(starRating: number) {
+        if (starRating < 1 || starRating > 5) {
+            throw new Error('Star rating must be between 1 and 5');
+        }
+        await this.reviewForm.scrollIntoViewIfNeeded();
+        console.log(`Selecting Rating_${starRating}_label star rating`);
+        this.reviewForm.locator(`label[id="Rating_${starRating}_label"]`).click({ force: true });
+    }
+
+    async fillNickname(nickname: string) {
+        await this.reviewFormFields.nickname.scrollIntoViewIfNeeded();
+        await this.reviewFormFields.nickname.fill(nickname);
+    }
+
+    async fillSummary(summary: string) {
+        await this.reviewFormFields.summary.scrollIntoViewIfNeeded();
+        await this.reviewFormFields.summary.fill(summary);
+    }
+
+    async fillReview(review: string) {
+        await this.reviewFormFields.review.scrollIntoViewIfNeeded();
+        await this.reviewFormFields.review.fill(review);
+    }
+
+    async clickSubmitButton() {
+        await this.reviewFormFields.submitButton.scrollIntoViewIfNeeded();
+        await this.reviewFormFields.submitButton.click();
+    }
+
+    async fillReviewForm(review: reviewDataTypes) {
+        if (review.stars) await this.selectStarRating(review.stars);
+        if (review.nickname) await this.fillNickname(review.nickname);
+        if (review.summary) await this.fillSummary(review.summary);
+        if (review.review) await this.fillReview(review.review);
+    }
+};
