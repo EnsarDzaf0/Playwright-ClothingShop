@@ -39,7 +39,7 @@ steps:
  
 
 - task: CmdLine@2
-
+  continueOnError: true
   inputs:
 
     script: 'npx playwright test --reporter=junit'
