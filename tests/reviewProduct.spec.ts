@@ -1,7 +1,6 @@
 import { test, expect, Locator } from '@playwright/test';
 import { HomePage } from '../pageObjects/home';
 import { ProductDetailsPage } from '../pageObjects/productDetails';
-import { reviewDataTypes } from '../interfaces/review';
 
 test.describe('Product Review', () => {
     test('Successful Product Review', async ({ page }) => {
@@ -20,4 +19,16 @@ test.describe('Product Review', () => {
         await expect(productDetailsPage.pageMessages).toBeVisible();
     });
 
+    test('Invalid Product Review Form Input', async ({ page }) => {
+        const homePage = new HomePage(page);
+        const productDetailsPage = new ProductDetailsPage(page);
+        await homePage.goto();
+        await homePage.clickFirstHotSellerProduct();
+        await productDetailsPage.switchToReviewsTab();
+        await productDetailsPage.clickSubmitButton();
+        await expect(productDetailsPage.reviewFormErrors.stars).toBeVisible();
+        await expect(productDetailsPage.reviewFormErrors.nickname).toBeVisible();
+        await expect(productDetailsPage.reviewFormErrors.summary).toBeVisible();
+        await expect(productDetailsPage.reviewFormErrors.review).toBeVisible();
+    });
 });

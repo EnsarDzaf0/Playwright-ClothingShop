@@ -14,6 +14,12 @@ export class ProductDetailsPage {
         submitButton: Locator;
     };
     readonly pageMessages: Locator;
+    readonly reviewFormErrors: {
+        stars: Locator;
+        nickname: Locator;
+        summary: Locator;
+        review: Locator;
+    }
 
     constructor(page: Page) {
         this.page = page;
@@ -28,6 +34,12 @@ export class ProductDetailsPage {
             submitButton: this.reviewForm.locator('button[class="action submit primary"]')
         };
         this.pageMessages = page.locator('div[class="page messages"]');
+        this.reviewFormErrors = {
+            stars: this.reviewForm.locator('div[id="ratings[4]-error"]'),
+            nickname: this.reviewForm.locator('div[id="nickname_field-error"]'),
+            summary: this.reviewForm.locator('div[id="summary_field-error"]'),
+            review: this.reviewForm.locator('div[id="review_field-error"]')
+        }
     }
 
     async switchToReviewsTab() {
