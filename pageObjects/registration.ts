@@ -20,8 +20,9 @@ export class RegistrationPage {
         email: Locator;
         firstName: Locator;
         lastName: Locator;
-        errorMessageBox: Locator;
-    }
+    };
+    readonly errorMessageBox: Locator;
+
 
     constructor(page: Page) {
         this.page = page;
@@ -42,8 +43,8 @@ export class RegistrationPage {
             email: this.form.locator('div[id="email_address-error"]'),
             firstName: this.form.locator('div[id="firstname-error"]'),
             lastName: this.form.locator('div[id="lastname-error"]'),
-            errorMessageBox: this.form.locator(`div:has-text("First Name is not valid! Last Name is not valid!"`)
-        }
+        };
+        this.errorMessageBox = page.locator('div[data-bind="html: $parent.prepareMessageForHtml(message.text)"] >> visible=true')
     }
 
     async goto() {

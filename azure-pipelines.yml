@@ -28,7 +28,17 @@ steps:
 
     command: 'ci'
 
- 
+- task: Mkdir@1
+
+  inputs:
+
+    script: 'mkdir -p .auth'
+
+- task: UpdtGitIgn@1
+  
+  inputs: 
+
+    script: 'echo "\n.auth" >> .gitignore'
 
 - task: CmdLine@2
 
