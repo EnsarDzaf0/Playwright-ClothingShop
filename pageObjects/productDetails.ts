@@ -20,6 +20,9 @@ export class ProductDetailsPage {
         summary: Locator;
         review: Locator;
     }
+    readonly sizePicker: Locator;
+    readonly colorPicker: Locator;
+    readonly addToCartButton: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -40,6 +43,9 @@ export class ProductDetailsPage {
             summary: this.reviewForm.locator('div[id="summary_field-error"]'),
             review: this.reviewForm.locator('div[id="review_field-error"]')
         }
+        this.sizePicker = page.locator('div[class="swatch-attribute-options clearfix"]').first();
+        this.colorPicker = page.locator('div[class="swatch-attribute-options clearfix"]').last();
+        this.addToCartButton = page.locator('button[title="Add to Cart"]');
     }
 
     async switchToReviewsTab() {
@@ -81,5 +87,18 @@ export class ProductDetailsPage {
         if (review.nickname) await this.fillNickname(review.nickname);
         if (review.summary) await this.fillSummary(review.summary);
         if (review.review) await this.fillReview(review.review);
+    }
+
+    async selectFirstSize() {
+        await this.sizePicker.locator('div[class="swatch-option text"]').first().click();
+    }
+
+    async selectFirstColor() {
+        await this.colorPicker.locator('div[class="swatch-option color"]').first().click();
+    }
+
+    async clickAddToCart() {
+        await this.addToCartButton.scrollIntoViewIfNeeded();
+        await this.addToCartButton.click();
     }
 };
