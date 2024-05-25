@@ -10,7 +10,7 @@ test.describe('Product Review', () => {
         await homePage.clickFirstHotSellerProduct();
         await productDetailsPage.switchToReviewsTab();
         await productDetailsPage.fillReviewForm({
-            stars: 5,
+            stars: 2,
             nickname: 'John Doe',
             summary: 'Great product!',
             review: 'I love this product!'

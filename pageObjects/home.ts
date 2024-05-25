@@ -6,6 +6,7 @@ export class HomePage {
     readonly hotSellers: Locator;
     readonly accountDropdownButton: Locator;
     readonly signOutButton: Locator;
+    readonly myAccountButton: Locator;
     readonly shoppingCart: Locator;
     readonly miniCart: Locator;
     readonly miniCartItems: Locator;
@@ -16,8 +17,9 @@ export class HomePage {
         this.page = page;
         this.homeLink = 'https://magento.softwaretestingboard.com/';
         this.hotSellers = page.locator('ol[class="product-items widget-product-grid"]');
-        this.accountDropdownButton = page.locator('button[data-action="customer-menu-toggle"] >> visible=true');
+        this.accountDropdownButton = page.locator('span[class="customer-name"] >> visible=true');
         this.signOutButton = page.locator('li[class="authorization-link"] >> visible=true');
+        this.myAccountButton = page.getByRole('link', { name: 'My Account' })
         this.shoppingCart = page.locator('a[class="action showcart"]');
         this.miniCart = page.locator('div[id="minicart-content-wrapper"]');
         this.miniCartItems = this.miniCart.locator('div[class="minicart-items-wrapper"]');
@@ -37,6 +39,12 @@ export class HomePage {
     async logout() {
         await this.accountDropdownButton.click();
         await this.signOutButton.click();
+    }
+
+    async openMyAccount() {
+        await this.accountDropdownButton.click();
+        await expect(this.myAccountButton).toBeVisible();
+        await this.myAccountButton.click();
     }
 
     async openMiniCart() {

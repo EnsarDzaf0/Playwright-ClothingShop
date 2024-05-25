@@ -1,0 +1,5 @@
+testName,email,password,errorType,errorMessage
+"Invalid Email","invalidEmail","password","email","Please enter a valid email address (Ex: johndoe@domain.com)."
+"Empty Email"," ","password","email","This is a required field."
+"Empty Password","validEmail@test.com"," ","password","This is a required field."
+"Invalid Credentials","validEmail@test.com","password","error","The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later."

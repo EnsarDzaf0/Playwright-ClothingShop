@@ -10,6 +10,11 @@ export class LoginPage {
         password: Locator;
         submitButton: Locator;
     };
+    readonly loginFormErrors: {
+        email: Locator;
+        password: Locator;
+    };
+    readonly errorMessageBox: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -21,6 +26,11 @@ export class LoginPage {
             password: this.loginForm.locator('input[id="pass"] >> visible=true'),
             submitButton: this.loginForm.locator('button[id="send2"] >> visible=true')
         };
+        this.loginFormErrors = {
+            email: this.loginForm.locator('div[id="email-error"] >> visible=true'),
+            password: this.loginForm.locator('div.mage-error:nth-of-type(1)'),
+        };
+        this.errorMessageBox = page.locator('div[data-bind="html: $parent.prepareMessageForHtml(message.text)"] >> visible=true');
     }
 
     async goto() {

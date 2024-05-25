@@ -1,0 +1,10 @@
+testName,email,currentPassword,newPassword,confirmPassword,errorType,errorMessage
+"Empty Email"," ","currentPassword","password","password","email","This is a required field."
+"Empty Current Password","validemail@test.com"," ","password","password","password","This is a required field."
+"Empty Password","validemail@test.com","password"," ","password","password","This is a required field."
+"Empty Confirm Password","validemail@test.com","currentPassword","password"," ","confirmPassword","This is a required field."
+"Invalid Email","testName","currentPassword","password","password","email","Please enter a valid email address."
+"Short Password","validemail@test.com","currentPassword","pass","Password123","password","Minimum length of this field must be equal or greater than 8 symbols. Leading and trailing spaces will be ignored."
+"One Class Password","validemail@test.com","currentPassword","password","password","password","Minimum of different classes of characters in password is 3. Classes of characters: Lower Case, Upper Case, Digits, Special Characters."
+"Password Mismatch","validemail@test.com","currentPassword","password","passwordLALA","confirmPassword","Please enter the same value again."
+"Current Password Mismatch","validemail@test.com","currentPassword","Password123","Password123","errorMessageBox","The password doesn't match this account. Verify the password and try again."
