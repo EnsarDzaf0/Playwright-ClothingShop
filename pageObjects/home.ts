@@ -12,6 +12,11 @@ export class HomePage {
     readonly miniCartItems: Locator;
     readonly firstItemInMiniCart: Locator;
     readonly firstItemDeleteButton: Locator;
+    readonly firstItemQuantity: Locator;
+    readonly updateQuantityButton: Locator;
+    readonly miniCartTotal: Locator;
+    readonly confirmDeleteButton: Locator;
+    readonly checkoutButton: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -22,9 +27,14 @@ export class HomePage {
         this.myAccountButton = page.getByRole('link', { name: 'My Account' })
         this.shoppingCart = page.locator('a[class="action showcart"]');
         this.miniCart = page.locator('div[id="minicart-content-wrapper"]');
-        this.miniCartItems = this.miniCart.locator('div[class="minicart-items-wrapper"]');
+        this.miniCartItems = this.miniCart.locator('ol[id="mini-cart"]');
         this.firstItemInMiniCart = this.miniCartItems.locator('li').first();
         this.firstItemDeleteButton = this.firstItemInMiniCart.locator('a[class="action delete"]');
+        this.firstItemQuantity = this.firstItemInMiniCart.locator('input[class="item-qty cart-item-qty"]');
+        this.updateQuantityButton = this.firstItemInMiniCart.locator('button[class="update-cart-item"]');
+        this.miniCartTotal = this.miniCart.locator('div[class="subtotal"]').locator('span[class="price"]');
+        this.confirmDeleteButton = page.locator('button[class="action-primary action-accept"]');
+        this.checkoutButton = page.locator('button[id="top-cart-btn-checkout"]');
     }
 
     async goto() {
@@ -42,9 +52,8 @@ export class HomePage {
     }
 
     async openMyAccount() {
-        await this.accountDropdownButton.click();
-        await expect(this.myAccountButton).toBeVisible();
-        await this.myAccountButton.click();
+        await this.page.goto('https://magento.softwaretestingboard.com/customer/account/');
+        await expect(this.page).toHaveTitle('My Account');
     }
 
     async openMiniCart() {
@@ -52,7 +61,19 @@ export class HomePage {
     }
 
     async deleteFirstItemFromMiniCart() {
-        await this.firstItemInMiniCart.hover();
         await this.firstItemDeleteButton.click();
+        await expect(this.confirmDeleteButton).toBeVisible();
+        await this.confirmDeleteButton.click();
+    }
+
+    async updateFirstItemQuantity(quantity: number) {
+        await this.firstItemQuantity.fill(String(quantity));
+        await this.firstItemQuantity.blur();
+        await expect(this.updateQuantityButton).toBeVisible();
+        await this.updateQuantityButton.click();
+    }
+
+    async openCheckout() {
+        await this.checkoutButton.click();
     }
 };

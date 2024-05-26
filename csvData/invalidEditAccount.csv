@@ -1,6 +1,6 @@
 testName,email,currentPassword,newPassword,confirmPassword,errorType,errorMessage
 "Empty Email"," ","currentPassword","password","password","email","This is a required field."
-"Empty Current Password","validemail@test.com"," ","password","password","password","This is a required field."
+"Empty Current Password","validemail@test.com"," ","password","password","currentPassword","This is a required field."
 "Empty Password","validemail@test.com","password"," ","password","password","This is a required field."
 "Empty Confirm Password","validemail@test.com","currentPassword","password"," ","confirmPassword","This is a required field."
 "Invalid Email","testName","currentPassword","password","password","email","Please enter a valid email address."

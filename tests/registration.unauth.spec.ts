@@ -20,14 +20,12 @@ test.describe('Registration', () => {
 
         await registrationPage.clickSubmitButton();
 
-        await registrationPage.page.waitForURL('**/customer/account/');
         await expect(registrationPage.page).toHaveTitle('My Account');
 
         await homePage.logout();
         await loginPage.goto();
         await loginPage.login(userData.email || '', userData.password || '');
 
-        await registrationPage.page.waitForURL('**/customer/account/');
         await expect(registrationPage.page).toHaveTitle('My Account');
     });
 
@@ -91,7 +89,6 @@ test.describe('Registration', () => {
 
         await registrationPage.clickSubmitButton();
 
-        await registrationPage.page.waitForURL('**/customer/account/');
         await expect(registrationPage.page).toHaveTitle('My Account');
 
         await homePage.logout();

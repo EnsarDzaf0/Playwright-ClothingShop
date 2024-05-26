@@ -1,0 +1,9 @@
+testName,firstName,lastName,company,streetAddress,city,state,zip,country,phoneNumber,errorType,errorMessage
+"Empty first name"," ",lastName,company,streetAddress,city,Alabama,12345,"United States",phoneNumber,firstName,"This is a required field."
+"Empty last name",firstName," ",company,streetAddress,city,Alabama,12345,"United States",phoneNumber,lastName,"This is a required field."
+"Empty street address",firstName,lastName,company," ",city,Alabama,12345,"United States",phoneNumber,streetAddress,"This is a required field."
+"Empty city",firstName,lastName,company,streetAddress," ",Alabama,12345,"United States",phoneNumber,city,"This is a required field."
+"Empty state",firstName,lastName,company,streetAddress,city,"Please select a region, state or province.",12345,"United States",phoneNumber,state,"This is a required field."
+"Empty zip",firstName,lastName,company,streetAddress,city,Alabama," ","United States",phoneNumber,zip,"This is a required field."
+"Empty country",firstName,lastName,company,streetAddress,city,Alabama,12345,"",phoneNumber,country,"This is a required field."
+"Empty phone number",firstName,lastName,company,streetAddress,city,Alabama,12345,"United States"," ",phoneNumber,"This is a required field."

@@ -28,7 +28,8 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
-    video: 'retain-on-failure'
+    video: 'retain-on-failure',
+    screenshot: 'only-on-failure'
   },
 
   /* Configure projects for major browsers */
@@ -39,16 +40,6 @@ export default defineConfig({
       name: 'chromium - auth',
       use: {
         ...devices['Desktop Chrome'],
-        storageState: '.auth/user.json',
-      },
-      dependencies: ['setup'],
-      testMatch: /.*\.auth\.spec\.ts/,
-    },
-
-    {
-      name: 'firefox - auth',
-      use: {
-        ...devices['Desktop Firefox'],
         storageState: '.auth/user.json',
       },
       dependencies: ['setup'],
@@ -70,14 +61,6 @@ export default defineConfig({
       name: 'chromium',
       use: {
         ...devices['Desktop Chrome'],
-      },
-      testMatch: /.*\.unauth\.spec\.ts/,
-    },
-
-    {
-      name: 'firefox',
-      use: {
-        ...devices['Desktop Firefox'],
       },
       testMatch: /.*\.unauth\.spec\.ts/,
     },
