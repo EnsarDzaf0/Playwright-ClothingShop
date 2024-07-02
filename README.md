@@ -2,6 +2,8 @@
 This repository contains Playwright TypeScript automation scripts designed for testing an online web clothing shop. 
 The test suite covers essential functionalities, including user login, registration, browsing the clothes list, managing the shopping cart, and completing the checkout process.
 
+Link: https://magento.softwaretestingboard.com/
+
 # Features
 - Login and Registration: Automated tests for user authentication and account creation.
 - Clothes List: Scripts for validating the display and functionality of the clothing items list.
